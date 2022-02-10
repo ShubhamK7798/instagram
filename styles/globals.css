@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .icon {
+    @apply text-2xl hover:scale-125 transition-all duration-500 ease-out drop-shadow-xl cursor-pointer;
+  }
+}
