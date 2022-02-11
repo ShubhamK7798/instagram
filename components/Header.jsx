@@ -21,14 +21,14 @@ const Header = () => {
       <nav className="flex justify-between p-4 max-w-5xl mx-auto items-center">
         {/* left */}
 
-        <div>
+        <div className="mr-4">
           <GrInstagram className="icon" />
         </div>
 
         {/* right */}
-        <div className="flex justify-between space-x-2 items-center">
+        <div className="flex justify-between space-x-4 items-center">
           <div className="flex mr-4 items-center border-2 rounded-lg px-2 py-1">
-            <input type="text" className="outline-none " placeholder="Search..." />
+            <input type="text" className="outline-none w-[15vw]  " placeholder="Search..." />
             <AiOutlineSearch className="text-2xl" />
           </div>
           {session.status === "authenticated" && (
@@ -43,7 +43,7 @@ const Header = () => {
 
           <FiMenu className="icon md:hidden" />
           <div
-            className="flex items-center cursor-pointer"
+            className="flex items-center cursor-pointer flex-shrink-0"
             onClick={session.status === "authenticated" ? signOut : signIn}
           >
             <Image

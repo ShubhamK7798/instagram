@@ -1,17 +1,21 @@
 import Image from "next/image";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { FiMessageCircle } from "react-icons/fi";
-import { FaRegPaperPlane } from "react-icons/fa";
+import {  FaRegPaperPlane } from "react-icons/fa";
+import {  GiCrossMark } from "react-icons/gi";
 import { HiOutlineBookmark } from "react-icons/hi";
 import Moment from 'react-moment';
 import { useState } from "react";
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { useSession } from "next-auth/react";
@@ -22,6 +26,8 @@ const Post = ({ caption, username, image, id, uid ,profilepicture ,post_time}) =
   const user = session?.data?.user;
   const [getcomments, setGetComments] = useState([]);
   const [comment, setComment] = useState();
+  const [like, setLike] = useState(false);
+  // const [getlike, setGetLike] = useState();
 
   useEffect(
     () =>
@@ -30,8 +36,19 @@ const Post = ({ caption, username, image, id, uid ,profilepicture ,post_time}) =
         (snapshot) =>
           setGetComments(snapshot.docs.map((item) => ({ ...item.data(), commentid: item.id })))
       ),
-    [db, id]
+    []
   );
+
+
+
+    
+
+
+
+
+  const deletePost = async ()=> {
+    const delPost = await deleteDoc(doc(db, "posts", id))
+  }
 
   const uploadComments = async () => {
     setComment("");
@@ -59,6 +76,10 @@ const Post = ({ caption, username, image, id, uid ,profilepicture ,post_time}) =
           <span className="text-md font-semibold">{username}</span>
         </div>
         <div className="text-sm italic"><Moment fromNow>{post_time?.toDate()}</Moment></div>
+        
+  {
+    user?.uid === uid && <div className="icon text-red-500" onClick={deletePost}  ><GiCrossMark/></div>
+  }
       </div>
 
       <div className="relative w-full h-80 bg-black text-white flex justify-center ">
@@ -68,7 +89,7 @@ const Post = ({ caption, username, image, id, uid ,profilepicture ,post_time}) =
 
       <div className="flex justify-between items-center p-2">
         <div className="flex space-x-2">
-          <AiOutlineHeart className="icon" />
+          {like ? <AiFillHeart className='icon text-red-500' onClick={()=> setLike(!like)} /> : <AiOutlineHeart className='icon'  onClick={()=> setLike(!like)} />}
           <FiMessageCircle className="icon" />
           <FaRegPaperPlane className="icon" />
         </div>

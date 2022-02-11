@@ -4,6 +4,6 @@
 
 @layer components {
   .icon {
-    @apply text-2xl hover:scale-125 transition-all duration-500 ease-out drop-shadow-xl cursor-pointer;
+    @apply text-2xl flex flex-shrink-0 hover:scale-125 transition-all duration-500 ease-out drop-shadow-xl cursor-pointer;
   }
 }

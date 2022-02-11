@@ -16,11 +16,11 @@ const Feed = () => {
   );
 
   return (
-    <main className="max-w-5xl mx-auto grid grid-cols-3">
+    <main className="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-3 ">
       {/* main section */}
-      <section className="col-span-3 lg:col-span-2 flex flex-col">
+      <section className="col-span-2  lg:col-span-2 flex flex-col  w-full  sm:max-w-md sm:mx-auto">
         {/* avatars */}
-        <div className="flex mx-4 items-center space-x-2 justify-start p-4 border-2 overflow-hidden">
+        <div className="flex mx-4 items-center space-x-2 justify-start p-4 border-2 overflow-x-scroll">
           {[...Array(12).keys()].map((item) => (
             <div
               key={item}
@@ -57,7 +57,7 @@ const Feed = () => {
       </section>
 
       {/* suggestions */}
-      <aside className="hidden lg:grid"></aside>
+      <aside className="hidden lg:grid mt-12"> working on suggestions </aside>
     </main>
   );
 };
