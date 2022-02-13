@@ -1,11 +1,15 @@
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { db } from "../firebase";
 import Post from "./Post";
+import Suggest from "./Suggest";
 
 const Feed = () => {
   const [post, setPost] = useState([]);
+  const session = useSession();
+  const user = session?.data?.user;
 
   useEffect(
     () =>
@@ -57,7 +61,24 @@ const Feed = () => {
       </section>
 
       {/* suggestions */}
-      <aside className="hidden lg:grid mt-12"> working on suggestions </aside>
+      <aside className="hidden lg:block h-96 w-full space-y-4"> 
+      {user && <Suggest name={user?.name} img={user?.image || '/1.jpg'} button={'switch'}/> }
+      
+      <Suggest name={'Suggestions For You'}  button={'see all'}/>
+      <Suggest name={'luffy'} img={'/2.jpg'} button={'Follow'}/>
+      <Suggest name={'luffy'} img={'/3.jpg'} button={'Follow'}/>
+      <Suggest name={'luffy'} img={'/4.jpg'} button={'Follow'}/>
+      <Suggest name={'luffy'} img={'/5.jpg'} button={'Follow'}/>
+
+
+
+      
+      
+      
+      
+      
+      
+       </aside>
     </main>
   );
 };

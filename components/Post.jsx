@@ -20,6 +20,7 @@ import {
 import { db } from "../firebase";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import { BsEmojiSmile } from "react-icons/bs";
 
 const Post = ({ caption, username, image, id, uid ,profilepicture ,post_time}) => {
   const session = useSession();
@@ -27,7 +28,9 @@ const Post = ({ caption, username, image, id, uid ,profilepicture ,post_time}) =
   const [getcomments, setGetComments] = useState([]);
   const [comment, setComment] = useState();
   const [like, setLike] = useState(false);
-  // const [getlike, setGetLike] = useState();
+  const [picker,setPicker] = useState(false)
+
+  
 
   useEffect(
     () =>
@@ -61,6 +64,8 @@ const Post = ({ caption, username, image, id, uid ,profilepicture ,post_time}) =
       comment_time: serverTimestamp(),
     });
   };
+
+  
 
   return (
     <div className="bg-white w-full flex flex-col mt-8 py-4 ">
@@ -126,8 +131,8 @@ const Post = ({ caption, username, image, id, uid ,profilepicture ,post_time}) =
         ))}
       </div>
 
-      <div className="flex justify-between px-2 space-x-4 items-center">
-        <button>icon</button>
+      <div className="flex justify-between px-2 space-x-4 items-center relative">
+        <i><BsEmojiSmile className="text-xl" /> </i>
         <textarea
           type="text"
           name="comment"
